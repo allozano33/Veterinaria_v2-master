@@ -80,7 +80,7 @@ public class MedicoDAO implements DAO<Medico> {
 
         try {
             writeFile = new FileWriter("medico.json");
-            writeFile.write(jsonObject.toJSONString());
+            writeFile.append(jsonObject.toJSONString());
             writeFile.close();
         } catch (IOException e) {
             e.printStackTrace();

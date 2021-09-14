@@ -85,7 +85,7 @@ public class ProprietarioDAO implements DAO<Proprietario>{
 
         try {
             writeFile = new FileWriter("proprietario.json");
-            writeFile.write(jsonObject.toJSONString());
+            writeFile.append(jsonObject.toJSONString());
             writeFile.close();
         } catch (IOException e) {
             e.printStackTrace();

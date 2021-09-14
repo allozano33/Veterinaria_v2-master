@@ -46,37 +46,34 @@ public class AnimalDAO implements DAO<Animal>{
             jsonObject = (JSONObject) parser.parse(new FileReader("animal.json"));
             JSONArray lista_animais = (JSONArray) jsonObject.get("Animal");
 
-            System.out.println(lista_animais);
-
             for (Object ani : lista_animais)
             {
                 Animal ani_obj = new Animal();
 
                 JSONObject animal = (JSONObject) ani;
 
+                ani_obj.setNome((String) animal.get("nome"));
                 ani_obj.setNumeroPaciente((String) animal.get("numeroPaciente"));
-                ani_obj.setEspecie((String) animal.get("espacie"));
+                ani_obj.setEspecie((String) animal.get("especie"));
                 ani_obj.setRaca((String) animal.get("raca"));
                 ani_obj.setCor((String) animal.get("cor"));
 
                 LocalDate dataDeNascimento = LocalDate.parse((String) animal.get("dataDeNascimento"));
                 ani_obj.setDataDeNascimento((dataDeNascimento));
 
-                JSONArray prop = (JSONArray) jsonObject.get("proprietario");
+                JSONObject obj = (JSONObject) animal.get("proprietario");
 
-                System.out.println(prop.toString());
+                Proprietario p = new Proprietario();
+                p.setCpf((String) obj.get("cpf"));
+                p.setNome((String) obj.get("nome"));
+                p.setEndereco((String) obj.get("endereco"));
+                p.setTelefoneContato((String) obj.get("telefoneContato"));
+                p.setSobrenome((String) obj.get("sobrenome"));
 
-                for (Object pro : prop){
-                    Proprietario p = new Proprietario();
+                LocalDate dataDeNascimentoPro = LocalDate.parse((String) obj.get("dataDeNascimento"));
+                p.setDataDeNascimento((dataDeNascimentoPro));
 
-                    JSONObject proprietario = (JSONObject) pro;
-
-                    p.setCpf((String) proprietario.get("cpf"));
-
-                    System.out.println(p.getCpf());
-                }
-
-                //ani_obj.setProprietario((String) animal.get("proprietario");
+                ani_obj.setProprietario((Proprietario) p);
 
                 animais.add(ani_obj);
             }
@@ -102,7 +99,7 @@ public class AnimalDAO implements DAO<Animal>{
 
         try {
             writeFile = new FileWriter("animal.json");
-            writeFile.write(jsonObject.toJSONString());
+            writeFile.append(jsonObject.toJSONString());
             writeFile.close();
         } catch (IOException e) {
             e.printStackTrace();
