@@ -1,6 +1,5 @@
 package com.company.DAO;
 
-import com.company.model.DAO;
 import com.company.model.Medico;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -25,7 +24,7 @@ public class MedicoDAO implements DAO<Medico> {
         jsonObject.put("Medico",medicos);
 
         try {
-            writeFile = new FileWriter("saida.json");
+            writeFile = new FileWriter("medico.json");
             writeFile.write(jsonObject.toJSONString());
             writeFile.close();
         } catch (IOException e) {
@@ -42,7 +41,7 @@ public class MedicoDAO implements DAO<Medico> {
         JSONParser parser = new JSONParser();
 
         try {
-            jsonObject = (JSONObject) parser.parse(new FileReader("saida.json"));
+            jsonObject = (JSONObject) parser.parse(new FileReader("medico.json"));
             JSONArray lista_medicos = (JSONArray) jsonObject.get("Medico");
 
             for (Object med : lista_medicos)
@@ -67,6 +66,26 @@ public class MedicoDAO implements DAO<Medico> {
         } catch (org.json.simple.parser.ParseException e) {
             e.printStackTrace();
         }
-        return  medicos;
+        return medicos;
+    }
+
+    @Override
+    public String atualizar(List<Medico> medicos) {
+
+        JSONObject jsonObject = new JSONObject();
+
+        FileWriter writeFile = null;
+
+        jsonObject.put("Medico",medicos);
+
+        try {
+            writeFile = new FileWriter("medico.json");
+            writeFile.write(jsonObject.toJSONString());
+            writeFile.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return jsonObject.toJSONString();
     }
 }

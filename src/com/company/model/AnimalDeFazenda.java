@@ -2,9 +2,9 @@ package com.company.model;
 
 import java.time.LocalDate;
 
-public class AnimaisDeFazenda extends Animais{
+public class AnimalDeFazenda extends Animal {
 
-    public AnimaisDeFazenda(String especie, String raca, String cor, LocalDate dataDeNascimento, String nome, Proprietario proprietario) {
+    public AnimalDeFazenda(String especie, String raca, String cor, LocalDate dataDeNascimento, String nome, Proprietario proprietario) {
         super(especie, raca, cor, dataDeNascimento, nome, proprietario);
     }
 

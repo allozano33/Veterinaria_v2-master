@@ -9,11 +9,27 @@ public class Proprietario extends Pessoa{
     private String endereco;
     private String telefoneContato;
 
+    public Proprietario(){
+
+    }
+
     public Proprietario(String cpf, String nome, String sobrenome, LocalDate dataDeNascimento, String endereco, String telefoneContato) throws ParseException {
         super(cpf, nome, sobrenome);
         this.dataDeNascimento = dataDeNascimento;
         this.endereco = endereco;
         this.telefoneContato = telefoneContato;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"cpf\":\"" + super.getCpf() + "\"" +
+                ", \"nome\":\"" + super.getNome() + "\"" +
+                ", \"sobrenome\":\"" + super.getSobrenome() + "\"" +
+                ", \"dataDeNascimento\":\"" + dataDeNascimento + "\""+
+                ", \"endereco\":\"" + endereco + "\"" +
+                ", \"telefoneContato\":\"" + telefoneContato + "\"" +
+                "}";
     }
 
     public LocalDate getDataDeNascimento() {
@@ -25,23 +41,22 @@ public class Proprietario extends Pessoa{
     }
 
     public String getEndereco() {
+
         return endereco;
     }
 
     public void setEndereco(String endereco) {
+
         this.endereco = endereco;
     }
 
     public String getTelefoneContato() {
+
         return telefoneContato;
     }
 
     public void setTelefoneContato(String telefoneContato) {
-        this.telefoneContato = telefoneContato;
-    }
 
-    @Override
-    public String toString() {
-        return super.toString();
+        this.telefoneContato = telefoneContato;
     }
 }

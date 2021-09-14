@@ -1,9 +1,12 @@
-package com.company.model;
+package com.company.DAO;
 
 import java.util.List;
 
 public interface DAO<T> {
+
     String cadastrar(List<T> obj);
 
-    List<Medico> listar();
+    List<T> listar();
+
+    String atualizar(List<T> obj);
 }
