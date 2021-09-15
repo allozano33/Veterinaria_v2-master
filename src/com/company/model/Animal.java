@@ -33,7 +33,7 @@ public class Animal {
                 ", \"raca\":\"" + raca + "\""  +
                 ", \"cor\":\"" + cor + "\""  +
                 ", \"dataDeNascimento\":\"" + dataDeNascimento + "\"" +
-                ", \"nome=\":\"" + nome + "\""  +
+                ", \"nome\":\"" + nome + "\""  +
                 ", \"proprietario\":" + proprietario +
                 "}";
     }

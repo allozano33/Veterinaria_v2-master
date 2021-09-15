@@ -8,8 +8,11 @@ import com.company.model.*;
 
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
 
@@ -74,16 +77,59 @@ public class Main {
 //        animalDAO.atualizar(listaAnimal);
 
 
-        List<Consulta> consultas = new ArrayList<>();
-        Proprietario proprietario = new Proprietario("20747082030", "Alesandro", "Peppa", LocalDate.of(1998,07,23),"Rua dos Bobos, 34","56634639");
-        AnimalDeFazenda animalDeFazenda = new AnimalDeFazenda("Cabrito","Quarto de Milha","Preta",LocalDate.of(2020,7,10),"Paloma",proprietario);
-        Medico medico = new Medico("20747082030", "pedro", "Teste", 5555555L, "neuro");
+//        List<Consulta> consultas = new ArrayList<>();
+//        Proprietario proprietario = new Proprietario("20747082030", "Alesandro", "Peppa", LocalDate.of(1998,07,23),"Rua dos Bobos, 34","56634639");
+//        AnimalDeFazenda animalDeFazenda = new AnimalDeFazenda("Cabrito","Quarto de Milha","Preta",LocalDate.of(2020,7,10),"Paloma",proprietario);
+//        Medico medico = new Medico("20747082030", "pedro", "Teste", 5555555L, "neuro");
+//
+//        Consulta consulta = new Consulta(LocalDate.of(1998,07,23),"dor de barriga", "virosa", "remedios e repouso",medico,animalDeFazenda);
+//        consultas.add(consulta);
+//        System.out.println(consultas);
+//
+//        ConsultaDAO consultaDAO = new ConsultaDAO();
+//        consultaDAO.cadastrar(consultas);
 
-        Consulta consulta = new Consulta(LocalDate.of(1998,07,23),"dor de barriga", "virosa", "remedios e repouso",medico,animalDeFazenda);
-        consultas.add(consulta);
-        System.out.println(consultas);
+//        System.out.println("------------------Atualizar Consulta------------------");
+//        for (Consulta con: consultaDAO.listar()) {
+//            System.out.println(con.getAnimal().getProprietario().getCpf());
+//        }
 
         ConsultaDAO consultaDAO = new ConsultaDAO();
-        consultaDAO.cadastrar(consultas);
+//        List<Consulta> listaConsulta = consultaDAO.listar();
+//        Proprietario proprietario = new Proprietario("20747082030", "Alessandro", "Lozano", LocalDate.of(1998,07,23),"Rua das ameixas, 66","56634639");
+//        AnimalDeFazenda animalDeFazenda = new AnimalDeFazenda("Bode","Quarto de Milha","Marrom",LocalDate.of(2020,7,10),"Lucifer",proprietario);
+//        Medico medico = new Medico("20747082030", "pedro", "Teste", 5555555L, "neuro");
+//
+//        Consulta consulta = new Consulta(LocalDateTime.now(),"machucado", "estresse", "remedios",medico,animalDeFazenda);
+//        listaConsulta.add(consulta);
+//        consultaDAO.atualizar(listaConsulta);
+
+//        System.out.println("------------------ Lista de consultas => ordenadas em ordem crescente por proprietário ------------------");
+//        List<Consulta> listaConsulta = consultaDAO.getByProprietario(consultaDAO.listar());
+//        for (Consulta consulta:listaConsulta) {
+//            System.out.println(consulta.getAnimal().getProprietario().getNome()+" -> "+consulta);
+//        }
+
+//        System.out.println("------------------ Lista de consultas => por nome de animal ordanada em ordem decrescente por data ------------------");
+//        List<Consulta> listaConsultaAnimal = consultaDAO.getPacienteByData(consultaDAO.listar(),"Mimosa");
+//        for (Consulta consultaByAnimal:listaConsultaAnimal) {
+//            System.out.println(consultaByAnimal.getAnimal().getNome()+" -> "+consultaByAnimal);
+//        }
+
+//        System.out.println("------------------ Lista de consultas => atribuidas a cada medico ------------------");
+//        Map<Object, List<Consulta>> listaConsultaMedico = consultaDAO.getTotalConsulta(consultaDAO.listar());
+//        System.out.println(listaConsultaMedico);
+//        for (Consulta consultaByAnimal:listaConsultaAnimal) {
+//            System.out.println(consultaByAnimal.getAnimal().getNome()+" -> "+consultaByAnimal);
+//        }
+
+        System.out.println("------------------ Lista de consultas => consultas do dia ordenada em ordem crescente por data  ------------------");
+        List<Consulta> listaConsultasData = consultaDAO.listaConsultaByData(consultaDAO.listar(),LocalDate.of(2021,9,15));
+
+        System.out.println("Agenda de consulta do dia");
+        for (Consulta consultaByData:listaConsultasData) {
+            System.out.println(" \n "+consultaByData.getAnimal().getNome()+"--> \n Médico=>"+consultaByData.getMedico()+ " \n  Paciente=>"+consultaByData.getAnimal()+ " \n  Proprietário=>"+consultaByData.getAnimal().getProprietario()+"\n");
+        }
+
     }
 }

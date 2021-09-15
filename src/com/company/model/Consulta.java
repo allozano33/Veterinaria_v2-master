@@ -1,16 +1,22 @@
 package com.company.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 
-public class Consulta {
-    private LocalDate dataHora = LocalDate.now();
+public class Consulta implements Comparator<Consulta> {
+    private LocalDateTime dataHora;
     private String motivo;
     private String diagnostico;
     private String tratamento;
     private Medico medico;
     private Animal animal;
 
-    public Consulta(LocalDate dataHora, String motivo, String diagnostico, String tratamento, Medico medico, Animal animal) {
+    public Consulta(){
+
+    }
+
+    public Consulta(LocalDateTime dataHora, String motivo, String diagnostico, String tratamento, Medico medico, Animal animal) {
         this.dataHora = dataHora;
         this.motivo = motivo;
         this.diagnostico = diagnostico;
@@ -19,11 +25,11 @@ public class Consulta {
         this.animal = animal;
     }
 
-    public LocalDate getDataHora() {
+    public LocalDateTime getDataHora() {
         return dataHora;
     }
 
-    public void setDataHora(LocalDate dataHora) {
+    public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
     }
 
@@ -71,11 +77,17 @@ public class Consulta {
     public String toString() {
         return "{" +
                 "\"dataHora\":\"" + dataHora + "\""  +
-                ", \" motivo\":\"" + motivo + "\""  +
+                ", \"motivo\":\"" + motivo + "\""  +
                 ", \"diagnostico\":\"" + diagnostico + "\""  +
                 ", \"tratamento\":\"" + tratamento + "\""  +
                 ", \"medico\":" + medico +
                 ", \"animal\":" + animal +
                 '}';
+    }
+
+
+    @Override
+    public int compare(Consulta o1, Consulta o2) {
+        return o1.getAnimal().getProprietario().getNome().compareToIgnoreCase(o2.getAnimal().getProprietario().getNome());
     }
 }
